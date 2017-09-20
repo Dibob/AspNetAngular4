@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{A1A1C89E-4C29-4183-AD01-3747A96BBBBA}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProductsApp/app/foto/foto.pipe.ts">
+    <Files>
+      <File FileName="ProductsApp/app/foto/foto.pipe.ts" Line="16" Column="22" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.ProductsApp PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

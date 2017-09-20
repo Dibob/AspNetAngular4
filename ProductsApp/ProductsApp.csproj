@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1A1C89E-4C29-4183-AD01-3747A96BBBBA}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ProductsApp</RootNamespace>
+    <AssemblyName>ProductsApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Models\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\Foto.cs" />
+    <Compile Include="Controllers\FotosController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Global.asax" />
+    <Content Include="packages.config" />
+    <Content Include="leao-branco.jpg" />
+    <Content Include="leao.jpg" />
+    <Content Include="systemjs.config.js" />
+    <Content Include="app\app.component.html" />
+    <Content Include="app\app.component.js" />
+    <Content Include="app\app.module.js" />
+    <Content Include="app\app.routes.js" />
+    <Content Include="app\main.js" />
+    <Content Include="app\botao\botao.component.html" />
+    <Content Include="app\botao\botao.component.js" />
+    <Content Include="app\botao\botao.module.js" />
+    <Content Include="app\cadastro\cadastro.component.html" />
+    <Content Include="app\cadastro\cadastro.component.js" />
+    <Content Include="app\foto\foto.component.css" />
+    <Content Include="app\foto\foto.component.html" />
+    <Content Include="app\foto\foto.component.js" />
+    <Content Include="app\foto\foto.export.js" />
+    <Content Include="app\foto\foto.module.js" />
+    <Content Include="app\foto\foto.pipe.js" />
+    <Content Include="app\foto\foto.pipes.js" />
+    <Content Include="app\foto\foto.service.js" />
+    <Content Include="app\listagem\foto-list.component.html" />
+    <Content Include="app\listagem\foto-list.component.js" />
+    <Content Include="app\listagem\listagem.component.html" />
+    <Content Include="app\listagem\listagem.component.js" />
+    <Content Include="app\pagination\pagination.component.html" />
+    <Content Include="app\pagination\pagination.component.js" />
+    <Content Include="app\painel\painel.component.css" />
+    <Content Include="app\painel\painel.component.html" />
+    <Content Include="app\painel\painel.component.js" />
+    <Content Include="app\painel\painel.module.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="typings\index.d.ts" />
+    <None Include="typings\globals\core-js\index.d.ts" />
+    <None Include="typings\globals\core-js\typings.json" />
+    <None Include="typings\globals\jasmine\index.d.ts" />
+    <None Include="typings\globals\jasmine\typings.json" />
+    <None Include="typings\globals\node\index.d.ts" />
+    <None Include="typings\globals\node\typings.json" />
+    <None Include="tsconfig.json" />
+    <None Include="typings.json" />
+    <None Include="package-lock.json" />
+    <None Include="package.json" />
+    <None Include="app\app.component.js.map" />
+    <None Include="app\app.component.ts" />
+    <None Include="app\app.module.js.map" />
+    <None Include="app\app.module.ts" />
+    <None Include="app\app.routes.js.map" />
+    <None Include="app\app.routes.ts" />
+    <None Include="app\main.js.map" />
+    <None Include="app\main.ts" />
+    <None Include="app\botao\botao.component.js.map" />
+    <None Include="app\botao\botao.component.ts" />
+    <None Include="app\botao\botao.module.js.map" />
+    <None Include="app\botao\botao.module.ts" />
+    <None Include="app\cadastro\cadastro.component.js.map" />
+    <None Include="app\cadastro\cadastro.component.ts" />
+    <None Include="app\foto\foto.component.js.map" />
+    <None Include="app\foto\foto.component.ts" />
+    <None Include="app\foto\foto.export.js.map" />
+    <None Include="app\foto\foto.export.ts" />
+    <None Include="app\foto\foto.module.js.map" />
+    <None Include="app\foto\foto.module.ts" />
+    <None Include="app\foto\foto.pipe.js.map" />
+    <None Include="app\foto\foto.pipe.ts">
+      <IncludeInPackage>false</IncludeInPackage>
+    </None>
+    <None Include="app\foto\foto.pipes.js.map" />
+    <None Include="app\foto\foto.service.js.map" />
+    <None Include="app\foto\foto.service.ts" />
+    <None Include="app\listagem\foto-list.component.js.map" />
+    <None Include="app\listagem\foto-list.component.ts" />
+    <None Include="app\listagem\listagem.component.js.map" />
+    <None Include="app\listagem\listagem.component.ts" />
+    <None Include="app\pagination\pagination.component.js.map" />
+    <None Include="app\pagination\pagination.component.ts" />
+    <None Include="app\painel\painel.component.js.map" />
+    <None Include="app\painel\painel.component.ts" />
+    <None Include="app\painel\painel.module.js.map" />
+    <None Include="app\painel\painel.module.ts" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>
