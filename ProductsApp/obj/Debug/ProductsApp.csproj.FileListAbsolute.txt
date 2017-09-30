@@ -1,5 +1,3 @@
-/Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.csprojResolveAssemblyReference.cache
-/Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.csproj.CoreCompileInputs.cache
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/ProductsApp.dll
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/ProductsApp.pdb
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/Microsoft.Web.Infrastructure.dll
@@ -23,5 +21,7 @@
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/System.Web.Http.xml
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/System.Web.Http.WebHost.xml
 /Users/disalles7/Projects/ProductsApp/ProductsApp/bin/Newtonsoft.Json.xml
+/Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.csprojResolveAssemblyReference.cache
+/Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.csproj.CoreCompileInputs.cache
 /Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.dll
 /Users/disalles7/Projects/ProductsApp/ProductsApp/obj/Debug/ProductsApp.pdb

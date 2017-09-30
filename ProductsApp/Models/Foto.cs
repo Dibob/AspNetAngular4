@@ -1,12 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+
 namespace ProductsApp.Models
 {
 
     public class Foto
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Url { get; set; }
-        public decimal Descricao { get; set; }
+		[JsonProperty("_id")]
+		public int Id { get; set; }
+		[Required]
+		[JsonProperty("titulo")]
+		public string Titulo { get; set; }
+		[JsonProperty("url")]
+		public string Url { get; set; }
+		[JsonProperty("descricao")]
+		public decimal Descricao { get; set; }
     }
 }

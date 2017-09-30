@@ -9,7 +9,7 @@ export class FotoService {
 
     http: Http;
     headers: Headers;
-    url: string = 'api/fotos';
+    url: string = 'http://127.0.0.1:8080/api/fotos';
 
     constructor(http: Http) {
 

@@ -1,39 +1,82 @@
-﻿using System;
+﻿
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using ProductsApp.Models;
 
 namespace ProductsApp.Controllers
 {
+    
     public class FotosController : ApiController
     {
-        Foto[] fotos = new Foto[]
-         {
+        private static IList<Foto>  listaDeFotos = new List<Foto>
+        {
             new Foto { Id = 1, Titulo = "Tomato Soup", Url = "Groceries", Descricao = 1 },
             new Foto { Id = 2, Titulo = "Yo-yo", Url = "Toys", Descricao = 3.75M },
             new Foto { Id = 3, Titulo = "Hammer", Url = "Hardware", Descricao = 16.99M }
-         };
+		};
+        int count = 3;
 
-
-
-
-        public IEnumerable<Foto> GetAllFotos()
+        [HttpGet]
+		public IEnumerable<Foto> TrazerFotos()
         {
-            return fotos;
+            return listaDeFotos;
         }
 
 
-        public IHttpActionResult GetFoto(int id)
+        [HttpGet]
+        public IHttpActionResult ObterFoto(int id)
         {
-            var foto = fotos.FirstOrDefault((p) => p.Id == id);
+            var foto = listaDeFotos.FirstOrDefault((p) => p.Id == id);
             if (foto == null)
             {
                 return NotFound();
             }
             return Ok(foto);
         }
-    }
+
+
+
+        /*
+        public IHttpActionResult TrazerResultadosPaginados(int offset, int limit)
+        {
+            
+        }*/
+
+
+        [HttpPost]
+        public IHttpActionResult Cadastrar([FromBody]Foto foto)
+        {
+            count++;
+            foto.Id = count;
+            listaDeFotos.Add(foto);
+            return Ok();
+		}
+
+
+        [HttpDelete]
+		public IHttpActionResult DeletarFotos(int id)
+        {
+            listaDeFotos.Remove(listaDeFotos.First(p=>p.Id == id));
+            return Ok();
+        }
+
+
+
+
+		[HttpPut]
+        public IHttpActionResult AtualizarFotos([FromBody]Foto foto)
+        {
+            Foto fotoAtualizar = listaDeFotos.First(p => p.Id == foto.Id);
+
+            if (fotoAtualizar != null)
+            {
+                listaDeFotos.Where(p => p.Id == foto.Id).ToList().ForEach(s => s = foto);
+                  return Ok();
+            }
+            return NotFound();
+        }
+	}
 }

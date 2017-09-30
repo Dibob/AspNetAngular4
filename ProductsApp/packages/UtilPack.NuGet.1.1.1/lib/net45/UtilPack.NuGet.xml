@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UtilPack.NuGet</name>
+    </assembly>
+    <members>
+        <member name="T:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper">
+            <summary>
+            During restore for agnostic framework, there will be two error messages that package is not compatible with Agnostic framework.
+            Use this class to suppress those and only those two messages, and everything else to pass thru to wrapped logger.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.#ctor(NuGet.Common.ILogger)">
+            <summary>
+            Creates a new instance of <see cref="T:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper"/> with given logger to delegate log methods to.
+            </summary>
+            <param name="logger">The wrapped logger. May be <c>null</c>, in which case the log methods become pass-thru.</param>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.Log(NuGet.Common.LogLevel,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.Log(NuGet.Common.ILogMessage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogAsync(NuGet.Common.LogLevel,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogAsync(NuGet.Common.ILogMessage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogDebug(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogError(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogInformation(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogInformationSummary(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogMinimal(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogVerbose(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.AgnosticFrameworkLoggerWrapper.LogWarning(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:UtilPack.NuGet.UtilPackNuGetUtility">
+            <summary>
+            This class contains extension method which are for types not contained in this library.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetAssemblyPathFromNuGetAssemblies(System.String[],System.String,System.String)">
+            <summary>
+            Gets the matching assembly path from set of assembly paths, the expanded home path of the package, and optional assembly path from "outside world", e.g. configuration.
+            </summary>
+            <param name="assemblyPaths">All assembly paths to be considered from this package.</param>
+            <param name="packageExpandedPath">The package home directory path.</param>
+            <param name="optionalGivenAssemblyPath">Optional assembly path from "outside world", e.g. configuration.</param>
+            <returns>Best matched assembly path, or <c>null</c>.</returns>
+        </member>
+        <member name="F:UtilPack.NuGet.UtilPackNuGetUtility.SDK_PACKAGE_NETCORE">
+            <summary>
+            The package ID for SDK package of framework <c>.NET Core App</c>. The value is <c>Microsoft.NETCore.App</c>.
+            </summary>
+        </member>
+        <member name="F:UtilPack.NuGet.UtilPackNuGetUtility.SDK_PACKAGE_NETSTANDARD">
+            <summary>
+            The package ID for SDK package of framework <c>.NET Standard</c>. The value is <c>NETStandard.Library</c>.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetSDKPackageID(NuGet.Frameworks.NuGetFramework,System.String)">
+            <summary>
+            Gets the package ID of the SDK package for given framework. If the optional override is supplied, always returns that.
+            </summary>
+            <param name="framework">This <see cref="T:NuGet.Frameworks.NuGetFramework"/>.</param>
+            <param name="givenID">The optional override.</param>
+            <returns>The value of <paramref name="givenID"/>, if it is non-<c>null</c> and not empty; otherwise tries to deduce the value from this <see cref="T:NuGet.Frameworks.NuGetFramework"/>. Currently, returns value of <see cref="F:UtilPack.NuGet.UtilPackNuGetUtility.SDK_PACKAGE_NETSTANDARD"/> for .NET Standard and .NET Desktop frameworks, and <see cref="F:UtilPack.NuGet.UtilPackNuGetUtility.SDK_PACKAGE_NETCORE"/> for .NET Core frameworks.</returns>
+            <seealso cref="M:UtilPack.NuGet.UtilPackNuGetUtility.GetSDKPackageVersion(NuGet.Frameworks.NuGetFramework,System.String,System.String)"/>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetSDKPackageVersion(NuGet.Frameworks.NuGetFramework,System.String,System.String)">
+            <summary>
+            Gets the package version of the SDK package for given framework. If the optional override is supplied, always returns that.
+            </summary>
+            <param name="framework">This <see cref="T:NuGet.Frameworks.NuGetFramework"/>.</param>
+            <param name="sdkPackageID">The package ID of the SDK package.</param>
+            <param name="givenVersion">The optional override.</param>
+            <returns>The value of <paramref name="givenVersion"/>, if it is non-<c>null</c> and not empty; otherwise tries to deduce the value from this <see cref="T:NuGet.Frameworks.NuGetFramework"/> and <paramref name="sdkPackageID"/>.</returns>
+            <seealso cref="M:UtilPack.NuGet.UtilPackNuGetUtility.GetSDKPackageID(NuGet.Frameworks.NuGetFramework,System.String)"/>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.TryAutoDetectThisProcessFramework(System.Nullable{System.ValueTuple{System.String,System.String}})">
+            <summary>
+            This is helper method to try and deduce the <see cref="T:NuGet.Frameworks.NuGetFramework"/> representing the currently running process.
+            If optional framework information is specified as parameter, this method will always return that information as wrapped around <see cref="T:NuGet.Frameworks.NuGetFramework"/>.
+            Otherwise, it will try deduce the required information from entry point assembly <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute"/> on desktop, and from <see cref="P:System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription"/> on core.
+            </summary>
+            <param name="givenInformation">Optional framework information passed from "outside world", e.g. configuration.</param>
+            <returns>The deduced <see cref="T:NuGet.Frameworks.NuGetFramework"/>, or <see cref="F:NuGet.Frameworks.NuGetFramework.AnyFramework"/> if automatic deduce failed.</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.TryAutoDetectThisProcessRuntimeIdentifier(System.String)">
+            <summary>
+            Tries to automatically detect the runtime identifier of currently running process.
+            </summary>
+            <param name="givenRID">The optional override.</param>
+            <returns>The value of <paramref name="givenRID"/>, if it is non-<c>null</c> and not empty; otherwise tries to deduce the RID using framework library methods. In such cahse, the result is always one of <c>"win"</c>, <c>"linux"</c>, <c>"osx"</c>, or <c>null</c>.</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetNuGetSettings(System.String[])">
+            <summary>
+            Helper method to get NuGet <see cref="T:NuGet.Configuration.ISettings"/> object from multiple potential NuGet configuration file locations.
+            </summary>
+            <param name="potentialConfigFileLocations">The potential configuration file locations. Will be traversed in given order.</param>
+            <returns>A <see cref="T:NuGet.Configuration.ISettings"/> loaded from first specified configuration file location, or <see cref="T:NuGet.Configuration.ISettings"/> loaded using defaults if no potential configuration file locations are specified (array is <c>null</c>, empty, or contains only <c>null</c>s).</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetNuGetSettingsWithDefaultRootDirectory(System.String,System.String[])">
+            <summary>
+            Helper method to get Nuget <see cref="T:NuGet.Configuration.ISettings"/> object from multiple potential NuGet configuration file locations, and use specified root directory if none of them work.
+            </summary>
+            <param name="rootDirectory">The root directory if none of the <paramref name="potentialConfigFileLocations"/> are valid.</param>
+            <param name="potentialConfigFileLocations">The potential configuration file locations. Will be traversed in given order.</param>
+            <returns>A <see cref="T:NuGet.Configuration.ISettings"/> loaded from first specified configuration file location, or <see cref="T:NuGet.Configuration.ISettings"/> loaded using defaults if no potential configuration file locations are specified (array is <c>null</c>, empty, or contains only <c>null</c>s).</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetNuGetFrameworkFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            Tries to parse the <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute"/> applied to this assembly into <see cref="T:NuGet.Frameworks.NuGetFramework"/>.
+            </summary>
+            <param name="assembly">This <see cref="T:System.Reflection.Assembly"/>.</param>
+            <returns>A <see cref="T:NuGet.Frameworks.NuGetFramework"/> parsed from <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName"/>, or <see cref="F:NuGet.Frameworks.NuGetFramework.AnyFramework"/> if no such attribute is applied to this assembly.</returns>
+            <exception cref="T:System.NullReferenceException">If this <see cref="T:System.Reflection.Assembly"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetNuGetFrameworkStringFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            Tries to get the framework string from <see cref="T:System.Runtime.Versioning.TargetFrameworkAttribute"/> possibly applied to this assembly.
+            </summary>
+            <param name="assembly">This <see cref="T:System.Reflection.Assembly"/>.</param>
+            <returns>The value of <see cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName"/> possibly applied to this assembly, or <c>null</c> if no such attribute was found.</returns>
+            <exception cref="T:System.NullReferenceException">If this <see cref="T:System.Reflection.Assembly"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:UtilPack.NuGet.UtilPackNuGetUtility.GetRuntimeAssembliesDelegate">
+            <summary>
+            Gets the default <see cref="T:UtilPack.NuGet.GetFileItemsDelegate"/> which will return all runtime assemblies for given <see cref="T:NuGet.ProjectModel.LockFileTargetLibrary"/>.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.UtilPackNuGetUtility.GetAllDependencies(NuGet.ProjectModel.LockFileTarget,System.Collections.Generic.IEnumerable{System.String},System.Func{NuGet.Packaging.Core.PackageDependency,System.Boolean})">
+            <summary>
+            Helper method to compute closed set of dependencies of given package IDs, using information of this <see cref="T:NuGet.ProjectModel.LockFileTarget"/>.
+            </summary>
+            <param name="target">This <see cref="T:NuGet.ProjectModel.LockFileTarget"/>.</param>
+            <param name="packageIDs">The IDs of entrypoint packages.</param>
+            <param name="additionalCheck">Optional additional check for single <see cref="T:NuGet.Packaging.Core.PackageDependency"/>. If supplied, all dependencies that the callback returns <c>false</c> will be filtered out.</param>
+            <returns>An enumerable of all direct and indirect dependencies of given package IDs, including the package IDs themselves.</returns>
+        </member>
+        <member name="T:UtilPack.NuGet.BoundRestoreCommandUser">
+            <summary>
+            This class binds itself to specific <see cref="T:NuGet.Frameworks.NuGetFramework"/> and then performs restore commands via <see cref="M:UtilPack.NuGet.BoundRestoreCommandUser.RestoreIfNeeded(System.Threading.CancellationToken,System.ValueTuple{System.String,System.String}[])"/> method.
+            It also caches results so that restore command is invoked only if needed.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.BoundRestoreCommandUser.#ctor(NuGet.Configuration.ISettings,NuGet.Frameworks.NuGetFramework,System.String,NuGet.Common.ILogger,NuGet.Protocol.Core.Types.SourceCacheContext,System.Boolean)">
+            <summary>
+            Creates new instance of <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> with given parameters.
+            </summary>
+            <param name="nugetSettings">The settings to use.</param>
+            <param name="thisFramework">The framework to bind to.</param>
+            <param name="runtimeIdentifier">The runtime identifier. Will be used by <see cref="M:E_UtilPack.ExtractAssemblyPaths``1(UtilPack.NuGet.BoundRestoreCommandUser,NuGet.ProjectModel.LockFile,System.Func{System.String,System.Collections.Generic.IEnumerable{System.String},``0},UtilPack.NuGet.GetFileItemsDelegate,System.Collections.Generic.IEnumerable{System.String})"/> method.</param>
+            <param name="nugetLogger">The logger to use in restore command.</param>
+            <param name="sourceCacheContext">The optional <see cref="T:NuGet.Protocol.Core.Types.SourceCacheContext"/> to use.</param>
+            <param name="leaveSourceCacheOpen">Whether to leave the <paramref name="sourceCacheContext"/> open when disposing this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="nugetSettings"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:UtilPack.NuGet.BoundRestoreCommandUser.ThisFramework">
+            <summary>
+            Gets the framework that this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> is bound to.
+            </summary>
+            <value>The framework that this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> is bound to.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.BoundRestoreCommandUser.NuGetLogger">
+            <summary>
+            Gets the logger used in restore command.
+            </summary>
+            <value>The framework used in restore command.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.BoundRestoreCommandUser.LocalRepositories">
+            <summary>
+            Gets the local repositories by their root path.
+            </summary>
+            <value>The local repositories by their root path.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.BoundRestoreCommandUser.RuntimeIdentifier">
+            <summary>
+            Gets the runtime identifier that this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> is bound to.
+            </summary>
+            <value>The runtime identifier that this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> is bound to.</value>
+        </member>
+        <member name="M:UtilPack.NuGet.BoundRestoreCommandUser.RestoreIfNeeded(System.Threading.CancellationToken,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Performs restore command for given combinations of package and version.
+            Will use cached results, if available.
+            Returns resulting lock file.
+            </summary>
+            <param name="token">The cancellation token, in case actual restore will need to be performed.</param>
+            <param name="packageInfo">The package ID + version combination. The package version should be parseable into <see cref="T:NuGet.Versioning.VersionRange"/>. If the version is <c>null</c> or empty, <see cref="F:NuGet.Versioning.VersionRange.AllFloating"/> will be used.</param>
+            <returns>Cached or restored lock file.</returns>
+            <seealso cref="T:NuGet.Commands.RestoreCommand"/>
+        </member>
+        <member name="M:UtilPack.NuGet.BoundRestoreCommandUser.PerformRestore(System.ValueTuple{System.String,NuGet.Versioning.VersionRange}[],System.Threading.CancellationToken)">
+            <summary>
+            This method is invoked by <see cref="M:UtilPack.NuGet.BoundRestoreCommandUser.RestoreIfNeeded(System.Threading.CancellationToken,System.ValueTuple{System.String,System.String}[])"/> when the lock file is not in cache and restore command needs to be actually run.
+            </summary>
+            <param name="targets">What packages to restore.</param>
+            <param name="token">The cancellation token to use when performing restore.</param>
+            <returns>The <see cref="T:NuGet.ProjectModel.LockFile"/> generated by <see cref="T:NuGet.Commands.RestoreCommand"/>.</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.BoundRestoreCommandUser.CreatePackageSpec(System.ValueTuple{System.String,NuGet.Versioning.VersionRange}[])">
+            <summary>
+            Helper method to create <see cref="T:NuGet.ProjectModel.PackageSpec"/> out of package ID + version combinations.
+            </summary>
+            <param name="targets">The package ID + version combinations.</param>
+            <returns>A new instance of <see cref="T:NuGet.ProjectModel.PackageSpec"/> having <see cref="P:NuGet.ProjectModel.PackageSpec.TargetFrameworks"/> and <see cref="P:NuGet.ProjectModel.PackageSpec.Dependencies"/> populated as needed.</returns>
+        </member>
+        <member name="M:UtilPack.NuGet.BoundRestoreCommandUser.Dispose">
+            <summary>
+            Disposes the managed resources held by this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>
+            </summary>
+        </member>
+        <member name="T:UtilPack.NuGet.GetFileItemsDelegate">
+            <summary>
+            This delegate is used by <see cref="M:E_UtilPack.ExtractAssemblyPaths``1(UtilPack.NuGet.BoundRestoreCommandUser,NuGet.ProjectModel.LockFile,System.Func{System.String,System.Collections.Generic.IEnumerable{System.String},``0},UtilPack.NuGet.GetFileItemsDelegate,System.Collections.Generic.IEnumerable{System.String})"/> in order to get required assembly paths from single <see cref="T:NuGet.ProjectModel.LockFileTargetLibrary"/>.
+            </summary>
+            <param name="currentRID">The current runtime identifier (RID). E.g. "win", "unix", etc.</param>
+            <param name="targetLibrary">The current <see cref="T:NuGet.ProjectModel.LockFileTargetLibrary"/>.</param>
+            <param name="libraries">Lazily evaluated dictionary of all <see cref="T:NuGet.ProjectModel.LockFileLibrary"/> instances, based on package ID.</param>
+            <returns>The assembly paths for this <see cref="T:NuGet.ProjectModel.LockFileTargetLibrary"/>.</returns>
+        </member>
+        <member name="T:UtilPack.NuGet.TextWriterLogger">
+            <summary>
+            This class implements <see cref="T:NuGet.Common.ILogger"/> using <see cref="T:System.IO.TextWriter"/>s.
+            </summary>
+            <seealso cref="T:UtilPack.NuGet.TextWriterLoggerOptions"/>
+        </member>
+        <member name="M:UtilPack.NuGet.TextWriterLogger.#ctor(UtilPack.NuGet.TextWriterLoggerOptions)">
+            <summary>
+            Creates a new instance of <see cref="T:UtilPack.NuGet.TextWriterLogger"/> with given optional <see cref="T:UtilPack.NuGet.TextWriterLoggerOptions"/>.
+            </summary>
+            <param name="options">The given <see cref="T:UtilPack.NuGet.TextWriterLoggerOptions"/>. If not supplied, a new instance of <see cref="T:UtilPack.NuGet.TextWriterLoggerOptions"/> will be created and the default values will be used.</param>
+        </member>
+        <member name="E:UtilPack.NuGet.TextWriterLogger.LogEvent">
+            <summary>
+            This event will be invoked just before writing log message.
+            </summary>
+            <remarks>The message may be changed by the handler, see <see cref="T:UtilPack.NuGet.LogMessageEventArgs"/>.</remarks>
+        </member>
+        <member name="M:UtilPack.NuGet.TextWriterLogger.Log(NuGet.Common.ILogMessage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:UtilPack.NuGet.TextWriterLogger.LogAsync(NuGet.Common.ILogMessage)">
+            <inheritdoc/>
+        </member>
+        <member name="T:UtilPack.NuGet.LogMessageEventArgs">
+            <summary>
+            This class provides a way to mutate a message in logging events of <see cref="T:UtilPack.NuGet.TextWriterLogger"/>.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.LogMessageEventArgs.#ctor(NuGet.Common.ILogMessage)">
+            <summary>
+            Creates a new instance of <see cref="T:UtilPack.NuGet.LogMessageEventArgs"/> with given message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="P:UtilPack.NuGet.LogMessageEventArgs.Message">
+            <summary>
+            Gets or sets the message to log.
+            </summary>
+            <value>The message to log.</value>
+        </member>
+        <member name="T:UtilPack.NuGet.TextWriterLoggerOptions">
+            <summary>
+            This class encapsulates all options for <see cref="T:UtilPack.NuGet.TextWriterLogger"/>.
+            </summary>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.Format">
+            <summary>
+            Gets or sets the format string for messages logged.
+            The arguments for format string are the following, in that order: <see cref="P:NuGet.Common.ILogMessage.Level"/>, <see cref="P:NuGet.Common.ILogMessage.Message"/>, and <see cref="T:NuGet.Common.ILogMessage"/>.
+            </summary>
+            <value>The format string for messages logged.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.DebugWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Debug"/>
+            By default, this is the <see cref="P:System.Console.Out"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Debug"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Debug"/>.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.ErrorWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Error"/>.
+            By default, this is the <see cref="P:System.Console.Error"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Error"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Error"/>.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.InfoWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Information"/>.
+            By default, this is the <see cref="P:System.Console.Out"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Information"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Information"/>.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.MinimalWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Minimal"/>.
+            By default, this is the <see cref="P:System.Console.Out"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Minimal"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Minimal"/>.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.VerboseWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Verbose"/>.
+            By default, this is the <see cref="P:System.Console.Out"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Verbose"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Verbose"/>.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.TextWriterLoggerOptions.WarningWriter">
+            <summary>
+            Gets or sets the <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Warning"/>.
+            By default, this is the <see cref="P:System.Console.Error"/>.
+            Set to <c>null</c> to disable logging done via <see cref="F:NuGet.Common.LogLevel.Warning"/>.
+            </summary>
+            <value>The <see cref="T:System.IO.TextWriter"/> for <see cref="F:NuGet.Common.LogLevel.Warning"/>.</value>
+        </member>
+        <member name="T:E_UtilPack">
+            <summary>
+            Contains extension methods for types defined in this assembly
+            </summary>
+        </member>
+        <member name="M:E_UtilPack.RestoreIfNeeded(UtilPack.NuGet.BoundRestoreCommandUser,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Performs restore command for given package and version, if not already cached.
+            Returns resulting lock file.
+            </summary>
+            <param name="restorer">This <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <param name="packageID">The package ID to use.</param>
+            <param name="version">The version to use. Should be parseable into <see cref="T:NuGet.Versioning.VersionRange"/>. If <c>null</c> or empty, <see cref="F:NuGet.Versioning.VersionRange.AllFloating"/> will be used.</param>
+            <param name="token">The optional cancellation token.</param>
+            <returns>Cached or restored lock file.</returns>
+            <seealso cref="T:NuGet.Commands.RestoreCommand"/>
+        </member>
+        <member name="M:E_UtilPack.RestoreIfNeeded(UtilPack.NuGet.BoundRestoreCommandUser,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Performs restore command for given package, if not already cached.
+            </summary>
+            <param name="restorer">This <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <param name="packageInfo">The package information containing package ID and package version.</param>
+            <returns>Cached or restored lock file.</returns>
+            <seealso cref="T:NuGet.Commands.RestoreCommand"/>
+        </member>
+        <member name="M:E_UtilPack.ExtractAssemblyPaths``1(UtilPack.NuGet.BoundRestoreCommandUser,NuGet.ProjectModel.LockFile,System.Func{System.String,System.Collections.Generic.IEnumerable{System.String},``0},UtilPack.NuGet.GetFileItemsDelegate,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            This is helper method to extract assembly path information from <see cref="T:NuGet.ProjectModel.LockFile"/> potentially produced by <see cref="M:UtilPack.NuGet.BoundRestoreCommandUser.RestoreIfNeeded(System.Threading.CancellationToken,System.ValueTuple{System.String,System.String}[])"/>.
+            The key will be package ID, and the result will be object generated by <paramref name="resultCreator"/>.
+            </summary>
+            <typeparam name="TResult">The type containing information about assembly paths for a single package.</typeparam>
+            <param name="restorer">This <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <param name="lockFile">The <see cref="T:NuGet.ProjectModel.LockFile"/> containing information about packages.</param>
+            <param name="resultCreator">The callback to create <typeparamref name="TResult"/> from assemblies of a single package.</param>
+            <param name="fileGetter">Optional callback to extract assembly paths from single <see cref="T:NuGet.ProjectModel.LockFileTargetLibrary"/>.</param>
+            <param name="filterablePackages">Optional array of package IDs which will be (along with their dependencies) filtered out from result.</param>
+            <returns>A dictionary containing assembly paths of packages.</returns>
+            <exception cref="T:System.NullReferenceException">If this <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="lockFile"/> or <paramref name="resultCreator"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:E_UtilPack.ResolveFullPath(UtilPack.NuGet.BoundRestoreCommandUser,NuGet.ProjectModel.LockFile,System.String)">
+            <summary>
+            Helper method to resolve full path from relative path (to one of the <see cref="P:NuGet.ProjectModel.LockFile.PackageFolders"/>) with the lock file.
+            </summary>
+            <param name="restorer">This <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <param name="lockFile">The <see cref="T:NuGet.ProjectModel.LockFile"/>.</param>
+            <param name="pathWithinPackageFolder">Some path originating from <paramref name="lockFile"/> and relative to <see cref="P:NuGet.ProjectModel.LockFile.PackageFolders"/>.</param>
+            <returns>The full path, or <c>null</c>.</returns>
+        </member>
+        <member name="M:E_UtilPack.ResolveFullPath(UtilPack.NuGet.BoundRestoreCommandUser,NuGet.ProjectModel.LockFile,System.Func{NuGet.Packaging.VersionFolderPathResolver,System.String})">
+            <summary>
+            Helper method to resolve full path from relative path (to one of the <see cref="P:NuGet.ProjectModel.LockFile.PackageFolders"/>) callback.
+            </summary>
+            <param name="restorer">This <see cref="T:UtilPack.NuGet.BoundRestoreCommandUser"/>.</param>
+            <param name="lockFile">The <see cref="T:NuGet.ProjectModel.LockFile"/>.</param>
+            <param name="pathExtractor">The callback which should return path relative to <see cref="P:NuGet.ProjectModel.LockFile.PackageFolders"/>.</param>
+            <returns>The full path, or <c>null</c>.</returns>
+        </member>
+    </members>
+</doc>

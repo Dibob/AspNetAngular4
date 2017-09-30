@@ -12,7 +12,7 @@ var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
 var FotoService = (function () {
     function FotoService(http) {
-        this.url = 'api/fotos';
+        this.url = 'http://127.0.0.1:8080/api/fotos';
         this.http = http;
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');

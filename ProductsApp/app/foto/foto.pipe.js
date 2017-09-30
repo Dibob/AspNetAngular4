@@ -17,7 +17,10 @@ var FiltroPorTitulo = (function () {
         console.log(fotos); // quem deve ser filtrado
         console.log(digitado); // o que deve ser usado como filtro
         digitado = digitado.toLowerCase();
-        return fotos.filter(function (foto) { return foto.titulo.toLowerCase().includes(digitado); });
+        if (fotos.length == 0)
+            return fotos;
+        else
+            return fotos.filter(function (foto) { return foto.titulo.toLowerCase().includes(digitado); });
     };
     FiltroPorTitulo = __decorate([
         core_1.Pipe({

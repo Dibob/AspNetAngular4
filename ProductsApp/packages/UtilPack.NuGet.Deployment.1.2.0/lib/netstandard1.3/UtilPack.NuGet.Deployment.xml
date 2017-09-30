@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UtilPack.NuGet.Deployment</name>
+    </assembly>
+    <members>
+        <member name="T:UtilPack.NuGet.Deployment.NuGetDeployment">
+            <summary>
+            This class contains configurable implementation for deploying NuGet packages.
+            Deploying in this context means restoring any missing packages, and copying and generating all the required files so that the package can be executed using <c>dotnet</c> tool.
+            This means that only one framework of the package will be used.
+            </summary>
+        </member>
+        <member name="M:UtilPack.NuGet.Deployment.NuGetDeployment.#ctor(UtilPack.NuGet.Deployment.DeploymentConfiguration)">
+            <summary>
+            Creates a new instance of <see cref="T:UtilPack.NuGet.Deployment.NuGetDeployment"/> with given <see cref="T:UtilPack.NuGet.Deployment.DeploymentConfiguration"/>.
+            </summary>
+            <param name="config">The deployment configuration.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="config"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:UtilPack.NuGet.Deployment.NuGetDeployment.DeployAsync(NuGet.Configuration.ISettings,System.String,NuGet.Common.ILogger,System.Threading.CancellationToken)">
+            <summary>
+            Performs deployment asynchronously.
+            </summary>
+            <param name="nugetSettings">The NuGet settings to use.</param>
+            <param name="targetDirectory">The directory where to place required files. If <c>null</c> or empty, then a new directory with randomized name will be created in temporary folder of the current user.</param>
+            <param name="logger">The optional logger to use.</param>
+            <param name="token">The optional cancellation token to use.</param>
+            <returns>The full path to the assembly which should be executed, along with the resolved target framework as <see cref="T:NuGet.Frameworks.NuGetFramework"/> object.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="nugetSettings"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:UtilPack.NuGet.Deployment.DeploymentConfiguration">
+            <summary>
+            This configuration provides a way to get information for deploying a single NuGet package.
+            </summary>
+            <seealso cref="T:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration"/>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessPackageID">
+            <summary>
+            Gets the package ID of the package to be deployed.
+            </summary>
+            <value>The package ID of the package to be deployed.</value>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessPackageVersion">
+            <summary>
+            Gets the package version of the package to be deployed.
+            </summary>
+            <value>The package version of the package to be deployed.</value>
+            <remarks>
+            If this property is <c>null</c> or empty string, then NuGet source will be queried for the newest version.
+            </remarks>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessFramework">
+            <summary>
+            Gets the framework name (the folder name of the 'lib' folder within NuGet package) which should be deployed.
+            </summary>
+            <value>The framework name (the folder name of the 'lib' folder within NuGet package) which should be deployed.</value>
+            <remarks>
+            This property will not be used for NuGet packages with only one framework.
+            </remarks>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessAssemblyPath">
+            <summary>
+            Gets the path within the package where the entrypoint assembly resides.
+            </summary>
+            <value>The path within the package where the entrypoint assembly resides.</value>
+            <remarks>
+            This property will not be used for NuGet packages with only one assembly.
+            </remarks>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessSDKFrameworkPackageID">
+            <summary>
+            Gets the package ID of the SDK of the framework of the NuGet package.
+            </summary>
+            <value>The package ID of the SDK of the framework of the NuGet package.</value>
+            <remarks>
+            If this property is <c>null</c> or empty string, then <see cref="T:UtilPack.NuGet.Deployment.NuGetDeployment"/> will try to use automatic detection of SDK package ID.
+            </remarks>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.ProcessSDKFrameworkPackageVersion">
+            <summary>
+            Gets the package version of the SDK of the framework of the NuGet package.
+            </summary>
+            <value>The package version of the SDK of the framework of the NuGet package.</value>
+            <remarks>
+            If this property is <c>null</c> or empty string, then <see cref="T:UtilPack.NuGet.Deployment.NuGetDeployment"/> will try to use automatic detection of SDK package version.
+            </remarks>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.DeploymentKind">
+            <summary>
+            Gets the deployment kind.
+            </summary>
+            <value>The deployment kind.</value>
+            <seealso cref="T:UtilPack.NuGet.Deployment.DeploymentKind"/>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DeploymentConfiguration.SDKPackageContainsAllPackagesAsAssemblies">
+            <summary>
+            Gets the information about SDK NuGet package (e.g. <c>"Microsoft.NETCore.App"</c>) related to how the SDK assemblies are relayed.
+            </summary>
+            <value>The information about SDK NuGet package (e.g. <c>"Microsoft.NETCore.App"</c>) related to how the SDK assemblies are relayed.</value>
+            <remarks>
+            Setting this to <c>true</c> will force the SDK package logic to assume that all compile time assemblies are package IDs of SDK sub-packages, thus affecting SDK package resolving logic.
+            Setting this to <c>false</c> will force the SDK package logic to assume that main SDK package only has the assemblies that are exposed via NuGet package dependency chain.
+            Leaving this unset (<c>null</c>) will use auto-detection (which will use <c>true</c> when deploying for .NET Core 2.0+, and will use <c>false</c> when deploying for other frameworks).
+            </remarks>
+        </member>
+        <member name="T:UtilPack.NuGet.Deployment.DeploymentKind">
+            <summary>
+            This enumeration controls which files are copied and generated during deployment process of <see cref="M:UtilPack.NuGet.Deployment.NuGetDeployment.DeployAsync(NuGet.Configuration.ISettings,System.String,NuGet.Common.ILogger,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="F:UtilPack.NuGet.Deployment.DeploymentKind.GenerateConfigFiles">
+            <summary>
+            This value indicates that only the entrypoint assembly will be copied to the target directory, and <c>.deps.json</c> file will be generated, along with <c>.runtimeconfig.json</c> file.
+            Those files will contain required information so that dotnet process will know to resolve dependency assemblies.
+            This way the IO load by the deployment process will be kept at minimum.
+            However, the dotnet process will then lock the DLL files in your package repository, as they are loaded directly from there.
+            </summary>
+        </member>
+        <member name="F:UtilPack.NuGet.Deployment.DeploymentKind.CopyNonSDKAssemblies">
+            <summary>
+            This value indicates that entrypoint assembly along with all the non-SDK dependencies will be copied to the target folder.
+            The <c>.deps.json</c> file will not be generated, but the <c>.runtimeconfig.json</c> file for .NET Core and <c>.exe.config</c> file for the .NET Desktop will be generated.
+            The IO load may become heavy in this scenario, since possibly a lot of files may need to be copied.
+            But with this deployment kind, the dotnet won't lock DLL files in your package repository.
+            </summary>
+        </member>
+        <member name="T:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration">
+            <summary>
+            This class provides easy-to-use implementation of <see cref="T:UtilPack.NuGet.Deployment.DeploymentConfiguration"/>.
+            </summary>
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessPackageID">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessPackageVersion">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessAssemblyPath">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessFramework">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessSDKFrameworkPackageID">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.ProcessSDKFrameworkPackageVersion">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.DeploymentKind">
+            <inheritdoc />
+        </member>
+        <member name="P:UtilPack.NuGet.Deployment.DefaultDeploymentConfiguration.SDKPackageContainsAllPackagesAsAssemblies">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
